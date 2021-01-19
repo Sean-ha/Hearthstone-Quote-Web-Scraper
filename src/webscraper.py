@@ -26,24 +26,21 @@ def get_quotes(name, href):
             continue
 
 
-def get_quotes_from_expansion(expansion_name):
-    url = 'https://hearthstone.gamepedia.com/The_Boomsday_Project'
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
-    # Finds all <a> tags
-    tags = soup.find_all('a')
-    # Iterates through all the tags, looking for those with an associated <img>, <href>, and <title> tags
-    for tag in tags:
-        title = tag.get('title')
-        href = tag.get('href')
-        img = tag.find('img')
-        if img == None:
-            continue
-        # The dimensions of the images of the cards
-        if img.get('width') == '200' and img.get('height') == '276':
-            get_quotes(title, href)
-    print(summon_dict)
-    print(attack_dict)
-
-
-get_quotes_from_expansion('Classic_card_list')
+dict = {}
+url = 'https://hearthstone.gamepedia.com/The_Boomsday_Project'
+page = requests.get(url)
+soup = BeautifulSoup(page.content, 'html.parser')
+# Finds all <a> tags
+tags = soup.find_all('a')
+# Iterates through all the tags, looking for those with an associated <img>, <href>, and <title> tags
+for tag in tags:
+    title = tag.get('title')
+    href = tag.get('href')
+    img = tag.find('img')
+    if img == None:
+        continue
+    # The dimensions of the images of the cards
+    if img.get('width') == '200' and img.get('height') == '276':
+        get_quotes(title, href)
+print(summon_dict)
+print(attack_dict)
